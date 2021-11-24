@@ -6,7 +6,7 @@
 /*   By: bterral <bterral@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/22 11:45:24 by bterral           #+#    #+#             */
-/*   Updated: 2021/11/23 17:51:57 by bterral          ###   ########.fr       */
+/*   Updated: 2021/11/24 16:14:08 by bterral          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	get_print_size(char *str, va_list args)
 	count = 0;
 	while (str[i])
 	{
-		if (str[i] == '%' && str[i + 1] && valid_format(str[i + 1])) // not sure it works at EOL, si juste un % ne pas afficher
+		if (str[i] == '%' && str[i + 1] && valid_format(str[i + 1]))
 		{
 			count += handle_variable(str[i + 1], args);
 			i = i + 2;

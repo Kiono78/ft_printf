@@ -6,7 +6,7 @@
 /*   By: bterral <bterral@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/23 10:49:25 by bterral           #+#    #+#             */
-/*   Updated: 2021/11/23 18:00:04 by bterral          ###   ########.fr       */
+/*   Updated: 2021/11/24 16:33:45 by bterral          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int	valid_format(char c)
 {
 	if (c == 'c' || c == 's' || c == 'p' || c == 'd' || c == 'i' \
-		|| c == 'u' || c == 'x')
+		|| c == 'u' || c == 'x' || c == '%' || c == 'X')
 	{
 		return (1);
 	}
@@ -23,9 +23,9 @@ int	valid_format(char c)
 		return (0);
 }
 
-int handle_variable(char c, va_list	args)
+int	handle_variable(char c, va_list	args)
 {
-	int len;
+	int	len;
 
 	if (c == 'c')
 		len = handle_char(va_arg(args, int));
@@ -33,11 +33,18 @@ int handle_variable(char c, va_list	args)
 		len = handle_string(va_arg(args, char *));
 	else if (c == 'p')
 		len = handle_pointer(va_arg(args, unsigned long long int));
-	else if (c == 'd') // to be converted in base 10
+	else if (c == 'x' || c == 'X')
+		len = handle_hexa(va_arg(args, unsigned long long int), c);
+	else if (c == 'd' || c == 'i')
 		len = handle_putnbr(va_arg(args, int));
-	else if (c == 'i')
-		len = handle_putnbr(va_arg(args, int)); // I think it should not work the same way with figures in non decimal format
-	else // dummy for tests
+	else if (c == 'u')
+		len = handle_unsignednbr(va_arg(args, unsigned int));
+	else if (c == '%')
+	{
+		ft_putchar_fd('%', 1);
+		len = 1;
+	}
+	else
 		len = 0;
 	return (len);
 }

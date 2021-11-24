@@ -6,7 +6,7 @@
 /*   By: bterral <bterral@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/23 10:51:15 by bterral           #+#    #+#             */
-/*   Updated: 2021/11/23 11:25:41 by bterral          ###   ########.fr       */
+/*   Updated: 2021/11/24 16:15:01 by bterral          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,15 @@ int	handle_string(char *str)
 {
 	int	len;
 
-	len = ft_strlen(str);
-	ft_putstr_fd(str, 1);
-	return(len);
+	if (str)
+	{
+		len = ft_strlen(str);
+		ft_putstr_fd(str, 1);
+	}
+	else
+	{
+		ft_putstr_fd("(null)", 1);
+		len = ft_strlen("(null)");
+	}
+	return (len);
 }
