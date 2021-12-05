@@ -6,7 +6,7 @@
 /*   By: bterral <bterral@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/22 11:42:06 by bterral           #+#    #+#             */
-/*   Updated: 2021/11/24 16:40:17 by bterral          ###   ########.fr       */
+/*   Updated: 2021/12/05 11:58:49 by bterral          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,17 +17,17 @@
 # include <stdarg.h>
 # include <limits.h>
 
-# include <stdio.h>
+# define UPPER "0123456789ABCDEF"
+# define LOWER "0123456789abcdef"
 
 int		ft_printf(const char *intput, ...);
-int		get_print_size(char *str, va_list args);
-int		valid_format(char c);
+int		get_print_size(const char *str, va_list args);
 int		handle_variable(char c, va_list	args);
 int		handle_char(char c);
 int		handle_string(char *str);
-int		handle_putnbr(int nb);
-int		handle_pointer(unsigned long long int ll_nb);
-int		handle_hexa(unsigned long long int ll_nb, char c);
-int		handle_unsignednbr(unsigned int nb);
+int		handle_putint(int nb);
+int		handle_putunsignedint(unsigned int nb);
+int		ft_putnbr_base_ll(unsigned long long nbr, char *base);
+int		ft_putnbr_base_uint(unsigned int nbr, char *base);
 
-#endif
+#endif 

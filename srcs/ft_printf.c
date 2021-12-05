@@ -6,13 +6,44 @@
 /*   By: bterral <bterral@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/22 11:45:24 by bterral           #+#    #+#             */
-/*   Updated: 2021/11/24 16:14:08 by bterral          ###   ########.fr       */
+/*   Updated: 2021/12/05 11:42:25 by bterral          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_printf.h"
 
-int	get_print_size(char *str, va_list args)
+#include <stdio.h>
+
+int	handle_variable(char c, va_list	args)
+{
+	int	len;
+
+	if (c == 'c')
+		len = handle_char(va_arg(args, int));
+	else if (c == 's')
+		len = handle_string(va_arg(args, char *));
+	else if (c == 'x')
+		len = ft_putnbr_base_uint(va_arg(args, unsigned int), LOWER);
+	else if (c == 'X')
+		len = ft_putnbr_base_uint(va_arg(args, unsigned int), UPPER);
+	else if (c == 'p')
+	{
+		len = 2;
+		ft_putstr_fd("0x", 1);
+		len += ft_putnbr_base_ll(va_arg(args, unsigned long long), LOWER);
+	}
+	else if (c == 'd' || c == 'i')
+		len = handle_putint(va_arg(args, int));
+	else if (c == 'u')
+		len = handle_putunsignedint(va_arg(args, unsigned int));
+	else if (c == '%' || c == '\n')
+		len = handle_char(c);
+	else
+		len = 0;
+	return (len);
+}
+
+int	get_print_size(const char *str, va_list args)
 {
 	int		count;
 	int		i;
@@ -21,17 +52,17 @@ int	get_print_size(char *str, va_list args)
 	count = 0;
 	while (str[i])
 	{
-		if (str[i] == '%' && str[i + 1] && valid_format(str[i + 1]))
+		if (str[i] == '%')
 		{
-			count += handle_variable(str[i + 1], args);
-			i = i + 2;
+			i++;
+			count += handle_variable(str[i], args);
 		}
 		else
 		{
 			ft_putchar_fd(str[i], 1);
-			i++;
 			count++;
 		}
+		i++;
 	}
 	return (count);
 }
@@ -39,13 +70,10 @@ int	get_print_size(char *str, va_list args)
 int	ft_printf(const char *input, ...)
 {
 	va_list	args;
-	char	*str;
 	int		size;
 
-	str = ft_strdup(input);
 	va_start(args, input);
-	size = get_print_size(str, args);
+	size = get_print_size(input, args);
 	va_end(args);
-	free(str);
 	return (size);
 }
