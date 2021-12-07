@@ -6,7 +6,7 @@
 /*   By: bterral <bterral@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/22 11:45:24 by bterral           #+#    #+#             */
-/*   Updated: 2021/12/05 12:05:14 by bterral          ###   ########.fr       */
+/*   Updated: 2021/12/07 09:23:53 by bterral          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ int	get_print_size(const char *str, va_list args)
 	count = 0;
 	while (str[i])
 	{
-		if (str[i] == '%')
+		if (str[i] == '%' && str[i + 1])
 		{
 			i++;
 			count += handle_variable(str[i], args);
