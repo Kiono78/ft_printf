@@ -17,9 +17,9 @@ In the parent directory:
 make
 ```
 
-Other tasks defined in the makefile
+Other make commands defined in the makefile
 
-| Commande       	|  Actions 							|
+| Commands       	|  Purpose 							|
 |----------------	|----------							|
 | `make`      	 	| Compile .c and create libft.a  	|
 | `make clean`    	| Delete .o							|
