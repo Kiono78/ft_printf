@@ -17,8 +17,6 @@ In the parent directory:
 make
 ```
 
-Other make commands defined in the makefile
-
 | Commands       	|  Purpose 							|
 |----------------	|----------							|
 | `make`      	 	| Compile .c and create libft.a  	|
